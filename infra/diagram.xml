@@ -1,0 +1,46 @@
+<mxfile>
+  <diagram name="ALB-EC2-RDS Architecture">
+    <mxGraphModel dx="800" dy="600" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="vpc" value="VPC 10.0.0.0/16" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1f5e1;strokeColor=#82b366;verticalAlign=top;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="720" height="520" as="geometry"/>
+        </mxCell>
+        <mxCell id="public-subnet-1" value="Public Subnet 1&#xa;10.0.1.0/24 (AZ-1a)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;verticalAlign=top" vertex="1" parent="1">
+          <mxGeometry x="80" y="100" width="280" height="180" as="geometry"/>
+        </mxCell>
+        <mxCell id="public-subnet-2" value="Public Subnet 2&#xa;10.0.2.0/24 (AZ-1c)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;verticalAlign=top" vertex="1" parent="1">
+          <mxGeometry x="440" y="100" width="280" height="180" as="geometry"/>
+        </mxCell>
+        <mxCell id="private-subnet-1" value="Private Subnet 1&#xa;10.0.11.0/24 (AZ-1a)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff4e6;strokeColor=#d79b00;verticalAlign=top" vertex="1" parent="1">
+          <mxGeometry x="80" y="320" width="280" height="200" as="geometry"/>
+        </mxCell>
+        <mxCell id="private-subnet-2" value="Private Subnet 2&#xa;10.0.12.0/24 (AZ-1c)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff4e6;strokeColor=#d79b00;verticalAlign=top" vertex="1" parent="1">
+          <mxGeometry x="440" y="320" width="280" height="200" as="geometry"/>
+        </mxCell>
+        <mxCell id="alb" value="ALB&#xa;app-alb" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1ba1e2;strokeColor=#006EAF;fontColor=#ffffff;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="240" y="150" width="300" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="ec2" value="EC2&#xa;app-server&#xa;(t3.micro)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ff8c1a;strokeColor=#d65d0f;fontColor=#ffffff;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="160" y="380" width="120" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="rds" value="RDS MySQL&#xa;app-database&#xa;(db.t3.micro)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#a20025;strokeColor=#6F0000;fontColor=#ffffff;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="520" y="370" width="120" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="internet" value="Internet" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333" vertex="1" parent="1">
+          <mxGeometry x="320" y="-80" width="140" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="arrow1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#0066CC;" edge="1" parent="1" source="internet" target="alb">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="arrow2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#FF6600;" edge="1" parent="1" source="alb" target="ec2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="arrow3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#CC0000;" edge="1" parent="1" source="ec2" target="rds">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,75 @@
+{
+  "description": "ALB → EC2 → RDS の3層構成",
+  "resources": [
+    {
+      "type": "VPC",
+      "name": "main-vpc",
+      "cidr": "10.0.0.0/16"
+    },
+    {
+      "type": "PublicSubnet",
+      "name": "public-subnet-1",
+      "cidr": "10.0.1.0/24",
+      "az": "ap-northeast-1a"
+    },
+    {
+      "type": "PublicSubnet",
+      "name": "public-subnet-2",
+      "cidr": "10.0.2.0/24",
+      "az": "ap-northeast-1c"
+    },
+    {
+      "type": "PrivateSubnet",
+      "name": "private-subnet-1",
+      "cidr": "10.0.11.0/24",
+      "az": "ap-northeast-1a"
+    },
+    {
+      "type": "PrivateSubnet",
+      "name": "private-subnet-2",
+      "cidr": "10.0.12.0/24",
+      "az": "ap-northeast-1c"
+    },
+    {
+      "type": "InternetGateway",
+      "name": "main-igw"
+    },
+    {
+      "type": "ALB",
+      "name": "app-alb",
+      "scheme": "internet-facing"
+    },
+    {
+      "type": "TargetGroup",
+      "name": "app-tg",
+      "port": 80,
+      "protocol": "HTTP"
+    },
+    {
+      "type": "EC2",
+      "name": "app-server",
+      "instanceType": "t3.micro"
+    },
+    {
+      "type": "RDS",
+      "name": "app-database",
+      "engine": "mysql",
+      "instanceClass": "db.t3.micro"
+    },
+    {
+      "type": "SecurityGroup",
+      "name": "alb-sg",
+      "inbound": ["0.0.0.0/0:80", "0.0.0.0/0:443"]
+    },
+    {
+      "type": "SecurityGroup",
+      "name": "ec2-sg",
+      "inbound": ["alb-sg:80"]
+    },
+    {
+      "type": "SecurityGroup",
+      "name": "rds-sg",
+      "inbound": ["ec2-sg:3306"]
+    }
+  ]
+}
